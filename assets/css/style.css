@@ -1,0 +1,40 @@
+* {
+    font-family: 'Roboto Slab', serif;
+}
+
+body {
+    background-color: black
+}
+
+.container {
+    position: relative;
+    text-align: center;
+    color: black;
+}
+
+.logosubtitle {
+    font-size: 18pt;
+    background: -webkit-linear-gradient(red, yellow);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bolder;
+    position: absolute;
+    bottom: 7px;
+    right: 300px;   
+ 
+}
+
+.box {
+    margin: 0 auto;
+    width: 600px;
+    border: 2px solid black;
+
+}
+
+.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+} 
+
