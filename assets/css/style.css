@@ -1,33 +1,40 @@
 * {
     font-family: 'Roboto Slab', serif;
+    color: white;
+    box-sizing: border-box;
+    
 }
 
 body {
     background-color: black
 }
 
-.container {
+.title {
     position: relative;
-    text-align: center;
-    color: black;
+    width: 500px;
+    margin: 0 auto;
 }
 
 .logosubtitle {
-    font-size: 18pt;
+    font-size: 24pt;
     background: -webkit-linear-gradient(red, yellow);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: bolder;
     position: absolute;
-    bottom: 7px;
-    right: 300px;   
- 
+    right:20px;
+    bottom: 35px;
 }
 
-.box {
+.audiobar {
+    width: 100px;
+    height: 32px;
+}
+
+.gamebox {
     margin: 0 auto;
     width: 600px;
-    border: 2px solid black;
+    border: 2px solid rgb(216, 172, 105);
 
 }
 
@@ -35,6 +42,18 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    width:100%;
 } 
 
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
