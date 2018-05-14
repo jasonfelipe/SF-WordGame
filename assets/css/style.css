@@ -63,6 +63,16 @@ body {
     color: yellow;
     border: 1px solid orange;
     display: block;
-    margin-left: auto;
+    margin-left: auto;  
     margin-right: auto;
+}
+
+.portrait {
+    width: 90%;
+    height: 90%;
+
+}
+
+#userGuess {
+    color: orange;
 }
