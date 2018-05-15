@@ -22,16 +22,6 @@ function gamestart() {
         "deejay"
     ];
 
-    document.getElementById("gamestart").innerHTML = "Type a letter to begin!"
-    document.getElementById("userInput").innerHTML = "You just typed "
-
-    var userGuess = document.getElementById("userGuess");
-
-    document.onkeyup = function (event) {
-        userGuess.textContent = event.key;
-    };
-
-
     //This picks a random word from characters
     var word = characters[Math.floor(Math.random() * characters.length)];
 
@@ -45,19 +35,29 @@ function gamestart() {
     //This sets up the players progress towards guessing the word
     var remainingLetters = word.length;
     document.getElementById("answer").innerHTML = answerArray.join("");
+   
 
 
-        if (userGuess != word) {
-            document.getElementById("gamestart").innerHTML = "You got it wrong!"
+
+    //This shows player input
+    //QUESTIONS TO ASK
+    //How do I save user keypress as a variable?
+    //How do I get userGuess to not be undefined?
+
+
+    var userGuess = event.key
+    document.getElementById("gamestart").innerHTML = "Type a letter to begin!"
+    document.getElementById("userInput").innerHTML = "You just typed " + userGuess
+    document.onkeyup = function (event) {
+        userGuess.textContent = event.key;
+    };    
+
+    for (var j = 0; j < word.length; j++) {
+        if (word[j] === userGuess) {
+            answerArray[j] = userGuess;
+            remainingLetters--;
         }
-        else {
-            for (var j = 0; j < word.length; j++) {
-                if (word[j] === userGuess) {
-                    answerArray[j] = userGuess;
-                    remainingLetters--;
-                }
-            }
-        }
+    }
     
 
 }
