@@ -1,7 +1,6 @@
 
 function gamestart() {
 
-
     var characters = [
         "ryu",
         "vega",
@@ -21,6 +20,42 @@ function gamestart() {
         "feilong",
         "deejay"
     ];
+
+    var alphabet = [
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f',
+        'g',
+        'h',
+        'i',
+        'j',
+        'k',
+        'l',
+        'm',
+        'n',
+        'o',
+        'p',
+        'q',
+        'r',
+        's',
+        't',
+        'u',
+        'v',
+        'w',
+        'x',
+        'y',
+        'z'
+    ]
+
+    //this keeps track of wins, losses, and lives
+    var wins = 0
+    var losses = 0
+    var tries = 3
+
+
 
     //This picks a random word from characters
     var word = characters[Math.floor(Math.random() * characters.length)];
@@ -46,26 +81,11 @@ function gamestart() {
     //     document.getElementById("userInput").innerHTML = "You just guessed " + userGuess
 
 
+    document.onkeyup = function (event) {
+        var userGuess = event.key
+        document.getElementById("userInput").innerHTML = "You just guessed " + userGuess
 
-while (remainingLetters < 0) {
-        document.onkeyup = function (event) {
-            var userGuess = event.key
-            document.getElementById("userInput").innerHTML = "You just guessed " + userGuess
-            
-            for (var j = 0; j < word.length; j++) {
-                if (word[j] === userGuess) {
-                    answerArray[j] = userGuess;
-                    remainingLetters--;
-                }
-                else {
-                    document.getElementById("wrong").innerHTML = "You guessed wrong!"
-
-                }
             }
 
-        }; document.getElementById("wrong").innerHTML = "YOU WIN!"
+        }
 
-
-
-    }
-}
