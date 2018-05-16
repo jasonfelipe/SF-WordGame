@@ -30,34 +30,42 @@ function gamestart() {
     var answerArray = [];
     for (var i = 0; i < word.length; i++) {
         answerArray[i] = "_";
-    };
+    }
 
     //This sets up the players progress towards guessing the word
     var remainingLetters = word.length;
     document.getElementById("answer").innerHTML = answerArray.join("");
-   
-
 
 
     //This shows player input
-    //QUESTIONS TO ASK
-    //How do I save user keypress as a variable?
-    //How do I get userGuess to not be undefined?
-
-
-    var userGuess = event.key
+    //TIPS: the variable of event.key won't work unless the parameter is met inside the brackets.
+    //What I mean by this is that userGuess = event.key has to be inside for this to work.
     document.getElementById("gamestart").innerHTML = "Type a letter to begin!"
-    document.getElementById("userInput").innerHTML = "You just typed " + userGuess
-    document.onkeyup = function (event) {
-        userGuess.textContent = event.key;
-    };    
+    // document.onkeyup = function (event) {
+    //     var userGuess = event.key
+    //     document.getElementById("userInput").innerHTML = "You just guessed " + userGuess
 
-    for (var j = 0; j < word.length; j++) {
-        if (word[j] === userGuess) {
-            answerArray[j] = userGuess;
-            remainingLetters--;
-        }
+
+
+while (remainingLetters < 0) {
+        document.onkeyup = function (event) {
+            var userGuess = event.key
+            document.getElementById("userInput").innerHTML = "You just guessed " + userGuess
+            
+            for (var j = 0; j < word.length; j++) {
+                if (word[j] === userGuess) {
+                    answerArray[j] = userGuess;
+                    remainingLetters--;
+                }
+                else {
+                    document.getElementById("wrong").innerHTML = "You guessed wrong!"
+
+                }
+            }
+
+        }; document.getElementById("wrong").innerHTML = "YOU WIN!"
+
+
+
     }
-    
-
 }
