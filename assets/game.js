@@ -1,3 +1,7 @@
+//these are global variables
+
+
+//the words
 var characters = [
     "ryu",
     "vega",
@@ -18,6 +22,8 @@ var characters = [
     "deejay"
 ];
 
+
+//this is to record which keys were pressed
 var alphabet = [
     'a',
     'b',
@@ -48,51 +54,164 @@ var alphabet = [
 ];
 
 
+//THE CHOSEN!
+var chosenCharacter = "";
+//the letters inside the character.  array
+var lettersinCharacter = [];
+//number of blanks in character word. array
+var characterBlanks
+//holds right letters. array
+var answersArray = [];
+//holds wrong letters. array
+var wrongLetter = [];
 
-function gamestart() {
-    //This picks a random word from characters
-    var word = characters[Math.floor(Math.random() * characters.length)];
+//the wins and losses, counter variables
+var wins = 0;
+var losses = 0;
+var guessesleft = 5;
+var rightGuess = 0;
 
+//--------------------RESET FUNCTION-------------------------------
 
-    //This sets the amount of letters as "_" from the chosen character
-    var answerArray = [];
-    for (var i = 0; i < word.length; i++) {
-        answerArray[i] = "_";
-    }
+function reset() 
+{
 
-    //This sets up the players progress towards guessing the word
-    var remainingLetters = word.length;
-    document.getElementById("answer").innerHTML = answerArray.join("");
-
-
-    //This shows player input
-    //TIPS: the variable of event.key won't work unless the parameter is met inside the brackets.
-    //What I mean by this is that userGuess = event.key has to be inside for this to work.
-    document.getElementById("gamestart").innerHTML = "Type a letter to begin!"
-
-    document.onkeyup = function (event) {
-        var userGuess = event.key
-            if (alphabet.indexOf(userGuess) > -1) { 
-                document.getElementById("userInput").innerHTML = "You guessed " + userGuess
-                
-                for (var j = 0; j < word.length; j++) {
-                    if (word[j] === userGuess) {
-                        answerArray[j] = userGuess;
-                        remainingLetters--;
-                    }      
-                }
-            }
-
-        
-            else {
-                document.getElementById("userInput").innerHTML = "Please input a letter."
-
-           
-
-            }
-
-        }        
+    var alphabet = [
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f',
+        'g',
+        'h',
+        'i',
+        'j',
+        'k',
+        'l',
+        'm',
+        'n',
+        'o',
+        'p',
+        'q',
+        'r',
+        's',
+        't',
+        'u',
+        'v',
+        'w',
+        'x',
+        'y',
+        'z'
+    ];
+    
+    //reset code
+    chosenCharacter = characters[Math.floor(Math.random() * characters.length)];
+    lettersinCharacter = chosenCharacter.split(''); 
+    characterBlanks = lettersinCharacter.length;
+    
+    //reset variables
+    letterGuessed = 0;
+    rightGuess = 0;
+    guessesleft = 5;
+    wrongLetter = [];
+    answersArray = [];
+    test=false;
+    gamestart();
 
 }
-        
 
+
+
+
+//---------------------------------------------------------------------------------------
+function gamestart() 
+{
+    //This picks a random word from characters
+    chosenCharacter = characters[Math.floor(Math.random() * characters.length)];
+
+    //split allows for the letters to be their own string
+    lettersinCharacter = chosenCharacter.split(''); 
+    
+    //This gives the number of blank spaces 
+    characterBlanks = lettersinCharacter.length;
+
+
+    //for blanks
+    for (var i = 0; i < characterBlanks; i++) {
+        answersArray.push('_') //pushes the underscores to replace the letters
+        document.getElementById('answer').innerHTML = answersArray;  //puts it in the selected id in the html
+    }
+
+    document.getElementById("gamestart").innerHTML = "Type a letter to begin!"
+
+}
+
+
+    function compareLetters(userGuess) {
+        var userGuess = event.key
+        if (chosenCharacter.indexOf(userGuess) > -1) //user input check
+        {
+            for (var i = 0; i < characterBlanks; i++) //this is the loop that checks blanks
+            {
+                if (lettersinCharacter[i] === userGuess)//this fills in user's correct letter into the array
+                {
+                    rightGuess++;
+                    answersArray[i] = userGuess;
+                    document.getElementById('answer').innerHTML = answersArray.join(' ');
+                }
+
+
+            }
+        }
+            //wrong stuff
+        else 
+            {
+                wrongLetter.push(userGuess);
+                guessesleft--; 
+                document.getElementById("guessesleft").innerHTML =  "Guesses Left  <br><br>" + guessesleft;
+                document.getElementById("wrong").innerHTML = "Wrong Letters <br><br>" + wrongLetter;
+
+            }
+}
+
+
+
+function winLose ()
+{
+    if (rightGuess === characterBlanks)
+        {
+            wins++;
+            document.getElementById('wins').innerHTML = "Wins " + wins;
+            alert('Placeholder win!!');
+            reset();
+        }
+    else if (guessesleft === 0){
+        losses++;
+        document.getElementById("losses").innerHTML = "Losses " + losses;
+        alert('Placeholder loss!!')
+        reset();
+    }
+}
+
+
+
+document.onkeyup = function(event)
+{
+	test = true;
+	var letterGuessed = event.key;
+	for(var i = 0; i < alphabet.length; i++)
+	{	
+		if(letterGuessed === alphabet[i] && test === true)
+		{
+			var spliceDword = alphabet.splice(i,1);
+			//Test / Debug
+			console.log('Double word is = ' + alphabet[i])
+			console.log('Spliced Word is = ' + spliceDword);
+
+			compareLetters(letterGuessed);
+			winLose();
+		}
+	}		
+		
+}
