@@ -75,8 +75,18 @@ var rightGuess = 0;
 
 function reset() 
 {
-
-    var alphabet = [
+    //reset code
+    chosenCharacter = characters[Math.floor(Math.random() * characters.length)];
+    lettersinCharacter = chosenCharacter.split(''); 
+    characterBlanks = lettersinCharacter.length;
+    
+    //reset variables
+    letterGuessed = 0;
+    rightGuess = 0;
+    guessesleft = 5;
+    wrongLetter = [];
+    answersArray = [];
+    alphabet = [
         'a',
         'b',
         'c',
@@ -104,27 +114,9 @@ function reset()
         'y',
         'z'
     ];
-    
-    //reset code
-    chosenCharacter = characters[Math.floor(Math.random() * characters.length)];
-    lettersinCharacter = chosenCharacter.split(''); 
-    characterBlanks = lettersinCharacter.length;
-    
-    //reset variables
-    letterGuessed = 0;
-    rightGuess = 0;
-    guessesleft = 5;
-    wrongLetter = [];
-    answersArray = [];
     test=false;
     gamestart();
-
 }
-
-
-
-
-//---------------------------------------------------------------------------------------
 function gamestart() 
 {
     //This picks a random word from characters
@@ -137,14 +129,51 @@ function gamestart()
     characterBlanks = lettersinCharacter.length;
 
 
+    //resets after game win/loss
+    rightGuess = 0;
+    guessesleft = 5;
+    wrongLetter = [];
+    answersArray = [];
+    alphabet = [
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f',
+        'g',
+        'h',
+        'i',
+        'j',
+        'k',
+        'l',
+        'm',
+        'n',
+        'o',
+        'p',
+        'q',
+        'r',
+        's',
+        't',
+        'u',
+        'v',
+        'w',
+        'x',
+        'y',
+        'z'
+    ];
+
+
     //for blanks
     for (var i = 0; i < characterBlanks; i++) {
-        answersArray.push('_') //pushes the underscores to replace the letters
+        answersArray[i] = "_"; //places the underscores to replace the letters
         document.getElementById('answer').innerHTML = answersArray;  //puts it in the selected id in the html
     }
 
     document.getElementById("gamestart").innerHTML = "Type a letter to begin!"
-
+    document.getElementById("guessesleft").innerHTML = "Guesses Left: " + guessesleft;
+    document.getElementById("answer").innerHTML = answersArray.join(' ');
+    document.getElementById("wrong").innerHTML = wrongLetter;
 }
 
 
@@ -158,7 +187,7 @@ function gamestart()
                 {
                     rightGuess++;
                     answersArray[i] = userGuess;
-                    document.getElementById('answer').innerHTML = answersArray.join(' ');
+                    document.getElementById('answer').innerHTML = answersArray.join('');
                 }
 
 
@@ -169,14 +198,11 @@ function gamestart()
             {
                 wrongLetter.push(userGuess);
                 guessesleft--; 
-                document.getElementById("guessesleft").innerHTML =  "Guesses Left  <br><br>" + guessesleft;
+                document.getElementById("guessesleft").innerHTML =  "Guesses Left: " + guessesleft;
                 document.getElementById("wrong").innerHTML = "Wrong Letters <br><br>" + wrongLetter;
 
             }
 }
-
-
-
 function winLose ()
 {
     if (rightGuess === characterBlanks)
@@ -184,6 +210,7 @@ function winLose ()
             wins++;
             document.getElementById('wins').innerHTML = "Wins " + wins;
             alert('Placeholder win!!');
+            document.getElementById('answer').innerHTML = chosenCharacter;
             reset();
         }
     else if (guessesleft === 0){
@@ -195,7 +222,6 @@ function winLose ()
 }
 
 
-
 document.onkeyup = function(event)
 {
 	test = true;
@@ -205,10 +231,6 @@ document.onkeyup = function(event)
 		if(letterGuessed === alphabet[i] && test === true)
 		{
 			var spliceDword = alphabet.splice(i,1);
-			//Test / Debug
-			console.log('Double word is = ' + alphabet[i])
-			console.log('Spliced Word is = ' + spliceDword);
-
 			compareLetters(letterGuessed);
 			winLose();
 		}
