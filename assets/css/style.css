@@ -23,7 +23,7 @@ body {
     font-weight: bolder;
     position: absolute;
     right:20px;
-    bottom: 35px;
+    bottom: 5px;
 }
 
 .audiobar {
@@ -83,6 +83,9 @@ body {
     -webkit-text-fill-color: transparent;
     font-weight: bolder;
     text-align: center;
-    right:100px;
 
+}
+
+#wrong {
+    color: red;
 }

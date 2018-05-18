@@ -1,5 +1,8 @@
 //these are global variables
 
+var gamestartaudio = new Audio ("assets/audio/characterselect.mp3")
+var audioLose = new Audio ('assets/audio/lose.mp3')
+
 
 //the words
 var characters = [
@@ -75,6 +78,20 @@ var rightGuess = 0;
 
 function reset() 
 {
+
+    //resets theme after win/lose.
+    gamestartaudio.play();
+        if (gamestartaudio.paused) {
+        gamestartaudio.play();
+        }else{
+        gamestartaudio.currentTime = 0
+        }
+    audioLose.pause();
+
+
+    document.getElementById("gamestart").innerHTML = "Type a letter to begin!"
+    document.getElementById('button').innerHTML = "RESET"
+
     //reset code
     chosenCharacter = characters[Math.floor(Math.random() * characters.length)];
     lettersinCharacter = chosenCharacter.split(''); 
@@ -119,6 +136,20 @@ function reset()
 }
 function gamestart() 
 {
+    gamestartaudio.play();
+        if (gamestartaudio.paused) {
+        gamestartaudio.play();
+
+        }else{
+        gamestartaudio.currentTime = 0
+        }
+    
+    audioLose.pause();
+
+
+    document.getElementById("gamestart").innerHTML = "Type a letter to begin!"
+    document.getElementById('button').innerHTML = "RESET"
+
     //This picks a random word from characters
     chosenCharacter = characters[Math.floor(Math.random() * characters.length)];
 
@@ -220,12 +251,9 @@ function winLose ()
         document.getElementById("answer").innerHTML = chosenCharacter.toUpperCase();
         document.getElementById('gamestart').innerHTML = "YOU LOSE <br><br> Will you TRY AGAIN? <br> (Or Press Any Key to TRY AGAIN!)"
         document.getElementById('button').innerHTML = "TRY AGAIN?"
-        var audioLose = new Audio ('assets/audio/lose.mp3')
+        gamestartaudio.pause();
+        audioLose.currentTime = 0; //resets the lose theme to 0
         audioLose.play();
-            if (guessesleft  > 0)
-            {
-                reset();
-            }
         }
     }
 
@@ -241,7 +269,7 @@ document.onkeyup = function(event)
 		{
 			var spliceDword = alphabet.splice(i,1);
 			compareLetters(letterGuessed);
-			winLose();
+            winLose();
 		}
 	}		
 		
