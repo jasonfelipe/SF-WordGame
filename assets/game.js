@@ -209,17 +209,26 @@ function winLose ()
         {
             wins++;
             document.getElementById('wins').innerHTML = "Wins " + wins;
-            alert('Placeholder win!!');
-            document.getElementById('answer').innerHTML = chosenCharacter;
-            reset();
+            document.getElementById('answer').innerHTML = chosenCharacter.toUpperCase();
+            document.getElementById('gamestart').innerHTML = "YOU WIN! <br><br> Press CONTINUE to play again!"
+            document.getElementById('button').innerHTML = "CONTINUE?"
+
         }
     else if (guessesleft === 0){
         losses++;
         document.getElementById("losses").innerHTML = "Losses " + losses;
-        alert('Placeholder loss!!')
-        reset();
+        document.getElementById("answer").innerHTML = chosenCharacter.toUpperCase();
+        document.getElementById('gamestart').innerHTML = "YOU LOSE <br><br> Will you TRY AGAIN? <br> (Or Press Any Key to TRY AGAIN!)"
+        document.getElementById('button').innerHTML = "TRY AGAIN?"
+        var audioLose = new Audio ('assets/audio/lose.mp3')
+        audioLose.play();
+            if (guessesleft  > 0)
+            {
+                reset();
+            }
+        }
     }
-}
+
 
 
 document.onkeyup = function(event)
