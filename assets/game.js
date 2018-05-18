@@ -1,19 +1,22 @@
 //these are global variables
 
+
+//audio files
 var gamestartaudio = new Audio ("assets/audio/characterselect.mp3")
 var audioLose = new Audio ('assets/audio/lose.mp3')
+var versus = new Audio ('assets/audio/versus.mp3')
+var winaudio = new Audio ('assets/audio/win.mp3')
 
+//GOOGLE CHROME DOESN'T WANT TO AUTOPLAY THIS!!!!
+gamestartaudio.play();
 
 //the words
 var characters = [
     "ryu",
-    "vega",
-    "bison",
     "ken",
     "cammy",
-    "balrog",
+    "balrog", 
     "honda",
-    "akuma",
     "zangief",
     "guile",
     "dhalsim",
@@ -24,6 +27,24 @@ var characters = [
     "feilong",
     "deejay"
 ];
+
+//I don't know what to do with these.
+var characterwin = {
+    "ryu": 'assets/images/ryu.gif',
+    "ken": 'assets/images/ken.gif',
+    "cammy": 'assets/images/cammy.gif',
+    "balrog":'assets/images/balrog.gif',
+    "honda": 'assets/images/honda.gif',
+    "zangief": 'assets/images/zangief.gif',
+    "guile": 'assets/images/guile.gif',
+    "dhalsim": 'assets/images/dhalsim.gif',
+    "sagat": 'assets/images/sagat.gif',
+    "blanka": 'assets/images/blanka.gif',
+    "chunli": 'assets/images/chunli.gif',
+    "thawk": 'assets/images/thawk.gif',
+    "feilong": 'assets/images/feilong.gif',
+    "deejay": 'assets/images/deejay.gif'
+}
 
 
 //this is to record which keys were pressed
@@ -56,7 +77,6 @@ var alphabet = [
     'z'
 ];
 
-
 //THE CHOSEN!
 var chosenCharacter = "";
 //the letters inside the character.  array
@@ -80,9 +100,9 @@ function reset()
 {
 
     //resets theme after win/lose.
-    gamestartaudio.play();
-        if (gamestartaudio.paused) {
-        gamestartaudio.play();
+    versus.play();
+        if (gamestartaudio.play) {
+        gamestartaudio.pause();
         }else{
         gamestartaudio.currentTime = 0
         }
@@ -93,7 +113,7 @@ function reset()
     document.getElementById('button').innerHTML = "RESET"
 
     //reset code
-    chosenCharacter = characters[Math.floor(Math.random() * characters.length)];
+    chosenCharacter = characters[Math.floor(Math.random() *characters.length)];
     lettersinCharacter = chosenCharacter.split(''); 
     characterBlanks = lettersinCharacter.length;
     
@@ -136,14 +156,12 @@ function reset()
 }
 function gamestart() 
 {
-    gamestartaudio.play();
-        if (gamestartaudio.paused) {
-        gamestartaudio.play();
-
+    versus.play();
+        if (gamestartaudio.play) {
+        gamestartaudio.pause();
         }else{
         gamestartaudio.currentTime = 0
         }
-    
     audioLose.pause();
 
 
@@ -243,7 +261,8 @@ function winLose ()
             document.getElementById('answer').innerHTML = chosenCharacter.toUpperCase();
             document.getElementById('gamestart').innerHTML = "YOU WIN! <br><br> Press CONTINUE to play again!"
             document.getElementById('button').innerHTML = "CONTINUE?"
-
+            winaudio.play();
+            reset();
         }
     else if (guessesleft === 0){
         losses++;
@@ -258,6 +277,13 @@ function winLose ()
     }
 
 
+//Not sure how I can improve this...
+function lossReset() {
+    if (guessesleft <= -1) 
+    {
+        reset();
+    }
+}
 
 document.onkeyup = function(event)
 {
@@ -269,6 +295,8 @@ document.onkeyup = function(event)
 		{
 			var spliceDword = alphabet.splice(i,1);
 			compareLetters(letterGuessed);
+            lossReset(); //supposed to reset if user presses any key after a loss, 
+                         //but if user presses a key that's correct.... well... it breaks the game.
             winLose();
 		}
 	}		
