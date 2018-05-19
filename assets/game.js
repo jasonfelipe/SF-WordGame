@@ -7,8 +7,7 @@ var audioLose = new Audio ('assets/audio/lose.mp3')
 var versus = new Audio ('assets/audio/versus.mp3')
 var winaudio = new Audio ('assets/audio/win.mp3')
 
-//GOOGLE CHROME DOESN'T WANT TO AUTOPLAY THIS!!!!
-gamestartaudio.play();
+//GOOGLE CHROME DOESN'T WANT TO AUTOPLAY BECAUSE IT INTERNAL SETTINGS
 
 //the words
 var characters = [
@@ -29,23 +28,24 @@ var characters = [
 ];
 
 //I don't know what to do with these.
-var characterwin = {
-    "ryu": 'assets/images/ryu.gif',
-    "ken": 'assets/images/ken.gif',
-    "cammy": 'assets/images/cammy.gif',
-    "balrog":'assets/images/balrog.gif',
-    "honda": 'assets/images/honda.gif',
-    "zangief": 'assets/images/zangief.gif',
-    "guile": 'assets/images/guile.gif',
-    "dhalsim": 'assets/images/dhalsim.gif',
-    "sagat": 'assets/images/sagat.gif',
-    "blanka": 'assets/images/blanka.gif',
-    "chunli": 'assets/images/chunli.gif',
-    "thawk": 'assets/images/thawk.gif',
-    "feilong": 'assets/images/feilong.gif',
-    "deejay": 'assets/images/deejay.gif'
-}
-
+var characterwin = [
+    {name: "ryu", image: 'assets/images/ryu.gif'},
+    {name: "ken", image: 'assets/images/ken.gif'},
+    {name: "cammy", image: 'assets/images/cammy.gif'},
+    {name: "balrog", image:'assets/images/balrog.gif'},
+    {name: "honda", image: 'assets/images/honda.gif'},
+    {name: "zangief", image: 'assets/images/zangief.gif'},
+    {name: "guile", image: 'assets/images/guile.gif'},
+    {name: "dhalsim", image: 'assets/images/dhalsim.gif'},
+    {name: "sagat", image: 'assets/images/sagat.gif'},
+    {name: "blanka", image: 'assets/images/blanka.gif'},
+    {name: "chunli", image: 'assets/images/chunli.gif'},
+    {name: "thawk", image: 'assets/images/thawk.gif'},
+    {name: "feilong", image: 'assets/images/feilong.gif'},
+    {name: "deejay", image: 'assets/images/deejay.gif'}
+]
+//I dont undertand
+console.log(characterwin[{name}])
 
 //this is to record which keys were pressed
 var alphabet = [
@@ -262,7 +262,14 @@ function winLose ()
             document.getElementById('gamestart').innerHTML = "YOU WIN! <br><br> Press CONTINUE to play again!"
             document.getElementById('button').innerHTML = "CONTINUE?"
             winaudio.play();
-            reset();
+
+            //I need help with putting replacing image on win.
+            for (var p = 0; p < characterwin.length; p++){
+                if (chosenCharacter = characterwin.name){
+                    document.getElementById('characterimage').innerHTML = image
+                } 
+            }
+
         }
     else if (guessesleft === 0){
         losses++;
@@ -273,12 +280,13 @@ function winLose ()
         gamestartaudio.pause();
         audioLose.currentTime = 0; //resets the lose theme to 0
         audioLose.play();
+
         }
     }
 
 
 //Not sure how I can improve this...
-function lossReset() {
+function winlossReset() {
     if (guessesleft <= -1) 
     {
         reset();
@@ -295,7 +303,7 @@ document.onkeyup = function(event)
 		{
 			var spliceDword = alphabet.splice(i,1);
 			compareLetters(letterGuessed);
-            lossReset(); //supposed to reset if user presses any key after a loss, 
+            winlossReset(); //supposed to reset if user presses any key after a loss, 
                          //but if user presses a key that's correct.... well... it breaks the game.
             winLose();
 		}
