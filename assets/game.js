@@ -227,7 +227,8 @@ function gamestart()
 
 
     function compareLetters(userGuess) {
-        var userGuess = event.key
+        var userGuess = event.key //event is something the browser regisers
+                                  //the browser 
         if (chosenCharacter.indexOf(userGuess) > -1) //user input check
         {
             for (var i = 0; i < characterBlanks; i++) //this is the loop that checks blanks
@@ -262,14 +263,15 @@ function winLose ()
             document.getElementById('gamestart').innerHTML = "YOU WIN! <br><br> Press CONTINUE to play again!"
             document.getElementById('button').innerHTML = "CONTINUE?"
             winaudio.play();
+            console.log(chosenCharacter);
+            
 
-            //I need help with putting replacing image on win.
-            for (var p = 0; p < characterwin.length; p++){
-                if (chosenCharacter = characterwin.name){
-                    document.getElementById('characterimage').innerHTML = image
+            for (var p = 0; p < characterwin.length; p++){ //Ok remember, double or triple equals is a comparison
+                                                            // one equals assigns a value!!
+                if (characterwin[p].name == chosenCharacter){
+                     document.getElementById('characterimage').src = characterwin[p].image;
                 } 
             }
-
         }
     else if (guessesleft === 0){
         losses++;
