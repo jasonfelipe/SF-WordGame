@@ -162,6 +162,7 @@ function gamestart()
         }
     audioLose.pause();
 
+    document.getElementById('characterimage').src = "assets/images/ssf2poster.jpg";
 
     document.getElementById("gamestart").innerHTML = "Type a letter to begin!"
     document.getElementById('button').innerHTML = "RESET"
