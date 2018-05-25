@@ -7,7 +7,7 @@ var audioLose = new Audio ('assets/audio/lose.mp3')
 var versus = new Audio ('assets/audio/versus.mp3')
 var winaudio = new Audio ('assets/audio/win.mp3')
 
-//GOOGLE CHROME DOESN'T WANT TO AUTOPLAY BECAUSE IT INTERNAL SETTINGS
+//GOOGLE CHROME DOESN'T WANT TO AUTOPLAY BECAUSE IT'S INTERNAL SETTINGS
 
 //the words
 var characters = [
@@ -27,7 +27,6 @@ var characters = [
     "deejay"
 ];
 
-//I don't know what to do with these.
 var characterwin = [
     {name: "ryu", image: 'assets/images/ryu.gif'},
     {name: "ken", image: 'assets/images/ken.gif'},
@@ -44,8 +43,7 @@ var characterwin = [
     {name: "feilong", image: 'assets/images/feilong.gif'},
     {name: "deejay", image: 'assets/images/deejay.gif'}
 ]
-//I dont undertand
-console.log(characterwin[{name}])
+
 
 //this is to record which keys were pressed
 var alphabet = [
@@ -227,8 +225,8 @@ function gamestart()
 
 
     function compareLetters(userGuess) {
-        var userGuess = event.key //event is something the browser regisers
-                                  //the browser 
+        var userGuess = event.key //event is something the browser registers, in this case its a key
+                                  //so things like clicks and key presses are events.
         if (chosenCharacter.indexOf(userGuess) > -1) //user input check
         {
             for (var i = 0; i < characterBlanks; i++) //this is the loop that checks blanks
