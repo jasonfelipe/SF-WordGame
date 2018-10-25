@@ -7,7 +7,7 @@ var audioLose = new Audio('assets/audio/lose.mp3')
 var versus = new Audio('assets/audio/versus.mp3')
 var winaudio = new Audio('assets/audio/win.mp3')
 
-//GOOGLE CHROME DOESN'T WANT TO AUTOPLAY BECAUSE IT INTERNAL SETTINGS
+//GOOGLE CHROME DOESN'T WANT TO AUTOPLAY BECAUSE IT'S INTERNAL SETTINGS
 
 //the words/assets
 
